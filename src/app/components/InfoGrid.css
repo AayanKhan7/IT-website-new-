@@ -1,0 +1,225 @@
+.alpha-grid-section {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  padding-bottom: 2rem;
+}
+
+.alpha-grid-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-flow: row;
+  align-items: stretch;
+  width: 100%;
+}
+
+.alpha-cell {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  min-height: 250px;
+  display: flex;
+  isolation: isolate;
+}
+
+.alpha-cell.col-span-3 { grid-column: span 3; }
+.alpha-cell.col-span-4 { grid-column: span 4; }
+.alpha-cell.col-span-6 { grid-column: span 6; min-height: 480px; }
+
+/* Image zooming effect */
+.cell-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dim-image {
+  filter: brightness(0.65);
+}
+
+.alpha-cell:hover .cell-bg-image {
+  transform: scale(1.08);
+}
+
+/* Base layouts */
+.relative-z {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.inner-padding {
+  padding: 36px 32px;
+  height: 100%;
+  width: 100%;
+}
+
+.flex-col-between {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.align-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Text styles */
+.alpha-cell h2, 
+.alpha-cell h3, 
+.alpha-cell p {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+.alpha-cell h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.alpha-cell p {
+  font-size: 0.85rem;
+  opacity: 0.95;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  font-family: 'Inter', sans-serif;
+}
+
+.alpha-link {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fff;
+  text-decoration: none;
+  margin-top: auto;
+  font-family: 'Poppins', sans-serif;
+}
+
+.alpha-link:hover {
+  text-decoration: underline;
+}
+
+.title-large {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.logo-text {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.hbr-logo-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hbr-border {
+  border: 4px solid #fff;
+  padding: 24px;
+  display: inline-block;
+}
+.hbr-text {
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.1;
+  text-align: center;
+  display: block;
+  white-space: pre-line;
+}
+
+.overlay-large h2 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  max-width: 600px;
+}
+.overlay-small h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: auto;
+  align-self: flex-end;
+  text-align: left;
+}
+
+.earnings-title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+}
+.earnings-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.earning-row {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  gap: 20px;
+  font-family: 'Inter', sans-serif;
+}
+.earning-label {
+  flex: 1;
+  opacity: 0.9;
+}
+.earning-value {
+  font-weight: 700;
+  width: 100px;
+}
+.earning-change {
+  font-weight: 600;
+  width: 140px;
+}
+
+/* Responsiveness */
+@media (max-width: 1200px) {
+  .alpha-cell { min-height: 220px; }
+  .alpha-cell.col-span-6 { min-height: 400px; }
+  .overlay-large h2 { font-size: 1.8rem; }
+  .earnings-title { font-size: 2rem; }
+  .earning-row { flex-wrap: wrap; gap: 8px;}
+  .earning-label { flex: 100%;}
+}
+
+@media (max-width: 1024px) {
+  .alpha-cell.col-span-3,
+  .alpha-cell.col-span-4,
+  .alpha-cell.col-span-6 {
+    grid-column: span 6; /* Every cell takes 2 columns across on tablet */
+  }
+}
+
+@media (max-width: 640px) {
+  .alpha-cell.col-span-3,
+  .alpha-cell.col-span-4,
+  .alpha-cell.col-span-6 {
+    grid-column: span 12; /* Single column layout on mobile */
+  }
+  .alpha-cell { min-height: 250px; }
+  .alpha-cell.col-span-6 { min-height: 280px; }
+}
