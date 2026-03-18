@@ -60,9 +60,9 @@ export function IndustriesPage() {
   return (
     <div className="min-h-screen bg-[#fafafa] selection:bg-sky-500/30">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-24 overflow-hidden bg-[#020617] text-white">
+      <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-24 overflow-hidden bg-[#020617] text-white">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(30,94,255,0.15),transparent_75%)]" />
-        <div className="container relative z-10 mx-auto px-6">
+        <div className="container relative z-10 mx-auto px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -72,13 +72,13 @@ export function IndustriesPage() {
             <Badge variant="outline" className="mb-6 px-4 py-1 border-sky-500/30 text-sky-400 bg-sky-500/10 backdrop-blur-sm">
               <Sparkles size={14} className="mr-2" /> Vertical Expertise
             </Badge>
-            <h1 className="text-6xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.1]">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.1]">
               Expertise Across <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-600">
                 Global Industries
               </span>
             </h1>
-            <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto font-light leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto font-light leading-relaxed">
               We engineer bespoke digital ecosystems designed to solve the specific friction points of your vertical.
             </p>
           </motion.div>
@@ -86,8 +86,8 @@ export function IndustriesPage() {
       </section>
 
       {/* Industries Tabs Section */}
-      <section className="py-24">
-        <div className="container mx-auto px-6">
+      <section className="py-16 sm:py-24">
+        <div className="container mx-auto px-4 sm:px-6">
           <Tabs defaultValue="manufacturing" className="w-full">
             <div className="sticky top-24 z-30 mb-16 pb-4 rounded-2xl border border-[#4d638d]/35 bg-[#0d172d]/85 p-2 backdrop-blur-md">
               <TabsList className="h-auto w-full flex-nowrap gap-2 overflow-x-auto bg-transparent p-0 shadow-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -95,12 +95,12 @@ export function IndustriesPage() {
                   <TabsTrigger
                     key={industry.id}
                     value={industry.id}
-                    className="group min-w-max flex items-center gap-3 px-5 py-3 rounded-xl border border-transparent text-[#dbe7ff] transition-all hover:bg-white/10 hover:text-white data-[state=active]:bg-white data-[state=active]:text-blue-600 data-[state=active]:shadow-md data-[state=active]:ring-1 data-[state=active]:ring-slate-200"
+                    className="group min-w-max flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl border border-transparent text-[#dbe7ff] transition-all hover:bg-white/10 hover:text-white data-[state=active]:bg-white data-[state=active]:text-blue-600 data-[state=active]:shadow-md data-[state=active]:ring-1 data-[state=active]:ring-slate-200"
                   >
-                    <div className="rounded-lg bg-[#1b263d] p-2 text-[#9db1d8] transition-colors group-data-[state=active]:bg-blue-50 group-data-[state=active]:text-blue-600">
+                    <div className="rounded-lg bg-[#1b263d] p-1.5 sm:p-2 text-[#9db1d8] transition-colors group-data-[state=active]:bg-blue-50 group-data-[state=active]:text-blue-600">
                       {industry.icon}
                     </div>
-                    <span className="text-sm font-semibold tracking-tight whitespace-nowrap">{industry.name}</span>
+                    <span className="text-xs sm:text-sm font-semibold tracking-tight whitespace-nowrap">{industry.name}</span>
                   </TabsTrigger>
                 ))}
               </TabsList>
@@ -114,7 +114,7 @@ export function IndustriesPage() {
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.98, y: -10 }}
                     transition={{ duration: 0.4 }}
-                    className="grid lg:grid-cols-12 gap-12"
+                    className="grid lg:grid-cols-12 gap-8 sm:gap-12"
                   >
                     {/* Industry Intel */}
                     <div className="lg:col-span-5 space-y-10">
@@ -122,10 +122,10 @@ export function IndustriesPage() {
                         <div className="w-20 h-20 rounded-[2.5rem] bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white mb-8 shadow-xl shadow-blue-500/20">
                           {industry.icon}
                         </div>
-                        <h2 className="text-5xl font-bold text-slate-900 mb-6 tracking-tight italic">
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight italic">
                           {industry.name}
                         </h2>
-                        <p className="text-xl text-slate-500 font-light leading-relaxed mb-10">
+                        <p className="text-base sm:text-lg md:text-xl text-slate-500 font-light leading-relaxed mb-10">
                           {industry.description}
                         </p>
                       </div>
@@ -151,7 +151,7 @@ export function IndustriesPage() {
 
                     {/* Solutions Grid */}
                     <div className="lg:col-span-7">
-                      <div className="bg-slate-900 rounded-[3rem] p-10 md:p-14 text-white relative overflow-hidden shadow-2xl">
+                      <div className="bg-slate-900 rounded-[2rem] sm:rounded-[3rem] p-6 sm:p-10 md:p-14 text-white relative overflow-hidden shadow-2xl">
                         <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-[80px] -z-0" />
                         <h3 className="text-3xl font-bold mb-10 relative z-10 tracking-tight">
                           Tailored Solutions
@@ -192,9 +192,9 @@ export function IndustriesPage() {
       </section>
 
       {/* Industrial Grade CTA */}
-      <section className="py-24 px-6 bg-slate-50 border-t border-slate-200">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto max-w-6xl">
-          <div className="bg-blue-600 rounded-[4rem] p-12 md:p-24 text-center text-white relative overflow-hidden shadow-2xl shadow-blue-500/20">
+          <div className="bg-blue-600 rounded-[2rem] sm:rounded-[4rem] p-8 sm:p-12 md:p-24 text-center text-white relative overflow-hidden shadow-2xl shadow-blue-500/20">
             <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/asfalt-light.png')]" />
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -202,13 +202,13 @@ export function IndustriesPage() {
               viewport={{ once: true }}
               className="relative z-10"
             >
-              <h2 className="text-5xl md:text-6xl font-bold mb-8 tracking-tighter italic">
+              <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-8 tracking-tighter italic">
                 Ready to evolve?
               </h2>
-              <p className="text-xl text-blue-100 max-w-xl mx-auto mb-10 font-light">
+              <p className="text-base sm:text-xl text-blue-100 max-w-xl mx-auto mb-10 font-light">
                 Consult with our vertical leads to define the roadmap for your industry's digital transformation.
               </p>
-              <button className="bg-white text-blue-600 hover:bg-slate-100 px-10 py-5 rounded-full font-bold text-lg shadow-xl transition-all hover:-translate-y-1">
+              <button className="bg-white text-blue-600 hover:bg-slate-100 px-7 sm:px-10 py-3.5 sm:py-5 rounded-full font-bold text-base sm:text-lg shadow-xl transition-all hover:-translate-y-1">
                 Schedule Strategy Session
               </button>
             </motion.div>

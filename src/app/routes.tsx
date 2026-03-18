@@ -1,29 +1,74 @@
 import { createBrowserRouter } from "react-router";
 import { RootLayout } from "./components/layout/RootLayout";
-import { HomePage } from "./pages/HomePage";
-import { AboutPage } from "./pages/AboutPage";
-import { ServicesPage } from "./pages/ServicesPage";
-import { ProductsPage } from "./pages/ProductsPage";
-import { SolutionsPage } from "./pages/SolutionsPage";
-import { IndustriesPage } from "./pages/IndustriesPage";
-import { PortfolioPage } from "./pages/PortfolioPage";
-import { BlogPage } from "./pages/BlogPage";
-import { ContactPage } from "./pages/ContactPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayout,
     children: [
-      { index: true, Component: HomePage },
-      { path: "about", Component: AboutPage },
-      { path: "services", Component: ServicesPage },
-      { path: "products", Component: ProductsPage },
-      { path: "solutions", Component: SolutionsPage },
-      { path: "industries", Component: IndustriesPage },
-      { path: "portfolio", Component: PortfolioPage },
-      { path: "blog", Component: BlogPage },
-      { path: "contact", Component: ContactPage },
+      {
+        index: true,
+        lazy: async () => {
+          const { HomePage } = await import("./pages/HomePage");
+          return { Component: HomePage };
+        },
+      },
+      {
+        path: "about",
+        lazy: async () => {
+          const { AboutPage } = await import("./pages/AboutPage");
+          return { Component: AboutPage };
+        },
+      },
+      {
+        path: "services",
+        lazy: async () => {
+          const { ServicesPage } = await import("./pages/ServicesPage");
+          return { Component: ServicesPage };
+        },
+      },
+      {
+        path: "products",
+        lazy: async () => {
+          const { ProductsPage } = await import("./pages/ProductsPage");
+          return { Component: ProductsPage };
+        },
+      },
+      {
+        path: "solutions",
+        lazy: async () => {
+          const { SolutionsPage } = await import("./pages/SolutionsPage");
+          return { Component: SolutionsPage };
+        },
+      },
+      {
+        path: "industries",
+        lazy: async () => {
+          const { IndustriesPage } = await import("./pages/IndustriesPage");
+          return { Component: IndustriesPage };
+        },
+      },
+      {
+        path: "portfolio",
+        lazy: async () => {
+          const { PortfolioPage } = await import("./pages/PortfolioPage");
+          return { Component: PortfolioPage };
+        },
+      },
+      {
+        path: "blog",
+        lazy: async () => {
+          const { BlogPage } = await import("./pages/BlogPage");
+          return { Component: BlogPage };
+        },
+      },
+      {
+        path: "contact",
+        lazy: async () => {
+          const { ContactPage } = await import("./pages/ContactPage");
+          return { Component: ContactPage };
+        },
+      },
     ],
   },
 ]);

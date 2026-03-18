@@ -58,7 +58,7 @@ export function ContactPage() {
       {/* Contact Grid - Responsive Grid Columns */}
       <section className="relative z-20 px-4 sm:px-6">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 -mt-8 md:-mt-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 -mt-2 sm:-mt-8 md:-mt-12">
             {contactInfo.map((info, idx) => (
               <motion.div
                 key={info.title}
@@ -67,7 +67,7 @@ export function ContactPage() {
                 transition={{ delay: idx * 0.1 }}
               >
                 <Card className="bg-[#ffffff] border border-slate-100 shadow-xl shadow-slate-200/50 rounded-2xl md:rounded-[2rem] hover:-translate-y-2 transition-transform duration-300">
-                  <CardContent className="p-6 md:p-8 text-center min-h-[150px] md:min-h-[170px] flex flex-col justify-center">
+                  <CardContent className="p-6 md:p-8 text-center min-h-[128px] sm:min-h-[150px] md:min-h-[170px] flex flex-col justify-center">
                     <div className="w-12 h-12 md:w-14 md:h-14 mx-auto rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-4 md:mb-6">
                       {info.icon}
                     </div>
@@ -133,7 +133,7 @@ export function ContactPage() {
               viewport={{ once: true }}
             >
               {/* Responsive Height Map */}
-              <div className="bg-slate-900 rounded-3xl md:rounded-[3rem] overflow-hidden relative group h-[250px] sm:h-[350px] lg:h-[400px]">
+              <div className="bg-slate-900 rounded-3xl md:rounded-[3rem] overflow-hidden relative group h-[220px] sm:h-[300px] md:h-[350px] lg:h-[400px]">
                 <div className="absolute inset-0 bg-[url('https://api.mapbox.com/styles/v1/mapbox/dark-v10/static/-122.4194,37.7749,12/800x600?access_token=YOUR_TOKEN')] bg-cover bg-center opacity-40 group-hover:scale-110 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10 md:right-10 flex items-center justify-between text-white">

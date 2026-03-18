@@ -67,7 +67,7 @@ export function BlogPage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="bg-gradient-to-br from-[#08152d] to-[#1a3557] text-white py-20 md:py-28">
+      <section className="bg-gradient-to-br from-[#08152d] to-[#1a3557] text-white py-16 sm:py-20 md:py-28">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -75,13 +75,13 @@ export function BlogPage() {
             className="max-w-4xl mx-auto text-center"
           >
             <Badge className="mb-4 bg-white/10 text-white border-white/20">Blog & Insights</Badge>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6" style={{ fontFamily: 'Poppins' }}>
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6" style={{ fontFamily: 'Poppins' }}>
               Latest{' '}
               <span className="bg-gradient-to-r from-[#00E0FF] to-[#2E6BFF] bg-clip-text text-transparent">
                 Insights & Trends
               </span>
             </h1>
-            <p className="text-xl text-gray-300 leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed">
               Stay informed with expert perspectives on technology, innovation, and digital transformation
             </p>
           </motion.div>
@@ -89,7 +89,7 @@ export function BlogPage() {
       </section>
 
       {/* Featured Post */}
-      <section className="py-20 bg-white">
+      <section className="py-16 sm:py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -97,16 +97,16 @@ export function BlogPage() {
             viewport={{ once: true }}
           >
             <Card className="border-2 border-[#00E0FF]/20 shadow-2xl hover:shadow-3xl transition-all duration-300 group cursor-pointer">
-              <CardContent className="p-8 md:p-12">
+              <CardContent className="p-5 sm:p-8 md:p-12">
                 <div className="grid lg:grid-cols-2 gap-8 items-center">
                   <div>
                     <Badge className="mb-4 bg-gradient-to-r from-[#1E5EFF] to-[#2E6BFF] text-white">
                       Featured Article
                     </Badge>
-                    <h2 className="text-3xl md:text-4xl font-bold text-[#08152d] mb-4 group-hover:text-[#1E5EFF] transition-colors" style={{ fontFamily: 'Poppins' }}>
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#08152d] mb-4 group-hover:text-[#1E5EFF] transition-colors" style={{ fontFamily: 'Poppins' }}>
                       {featuredPost.title}
                     </h2>
-                    <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                    <p className="text-base sm:text-lg text-gray-600 mb-6 leading-relaxed">
                       {featuredPost.excerpt}
                     </p>
                     <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
@@ -125,9 +125,9 @@ export function BlogPage() {
                     </div>
                   </div>
                   <div className="flex items-center justify-center">
-                    <div className="w-full h-64 bg-gradient-to-br from-[#1E5EFF]/10 to-[#2E6BFF]/10 rounded-2xl flex items-center justify-center">
+                    <div className="w-full h-48 sm:h-64 bg-gradient-to-br from-[#1E5EFF]/10 to-[#2E6BFF]/10 rounded-2xl flex items-center justify-center">
                       <div className="text-center">
-                        <div className="text-6xl font-bold bg-gradient-to-r from-[#1E5EFF] to-[#2E6BFF] bg-clip-text text-transparent mb-2">
+                        <div className="text-4xl sm:text-6xl font-bold bg-gradient-to-r from-[#1E5EFF] to-[#2E6BFF] bg-clip-text text-transparent mb-2">
                           2026
                         </div>
                         <div className="text-gray-600 font-semibold">Digital Future</div>
@@ -142,7 +142,7 @@ export function BlogPage() {
       </section>
 
       {/* Blog Posts Grid */}
-      <section className="py-20 bg-[#0d1a33]">
+      <section className="py-16 sm:py-20 bg-[#0d1a33]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -150,15 +150,15 @@ export function BlogPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-[#08152d] mb-4" style={{ fontFamily: 'Poppins' }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#08152d] mb-4" style={{ fontFamily: 'Poppins' }}>
               Recent Articles
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-base sm:text-xl text-gray-600 max-w-3xl mx-auto">
               Explore our latest thoughts on technology and innovation
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {posts.map((post, index) => (
               <motion.div
                 key={post.title}
@@ -207,7 +207,7 @@ export function BlogPage() {
       </section>
 
       {/* Newsletter Subscription */}
-      <section className="py-20 bg-gradient-to-r from-[#1E5EFF] to-[#2E6BFF]">
+      <section className="py-16 sm:py-20 bg-gradient-to-r from-[#1E5EFF] to-[#2E6BFF]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -215,19 +215,19 @@ export function BlogPage() {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto text-center text-white"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ fontFamily: 'Poppins' }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6" style={{ fontFamily: 'Poppins' }}>
               Subscribe to Our Newsletter
             </h2>
-            <p className="text-xl mb-8 opacity-90">
+            <p className="text-base sm:text-xl mb-8 opacity-90">
               Get the latest insights, trends, and updates delivered straight to your inbox
             </p>
             <div className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-6 py-4 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-white"
+                className="flex-1 px-5 sm:px-6 py-3.5 sm:py-4 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-white"
               />
-              <button className="bg-white text-[#1E5EFF] hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold transition-colors whitespace-nowrap">
+              <button className="bg-white text-[#1E5EFF] hover:bg-gray-100 px-6 sm:px-8 py-3.5 sm:py-4 rounded-lg font-semibold transition-colors whitespace-nowrap">
                 Subscribe Now
               </button>
             </div>

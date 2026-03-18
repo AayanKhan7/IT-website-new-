@@ -88,12 +88,12 @@ export function ProductsPage() {
     <div className="bg-[#f8fafc]">
 
       {/* ===== HERO ===== */}
-      <section className="relative py-28 bg-gradient-to-br from-[#08152d] via-[#0d1f44] to-[#1a3557] text-white overflow-hidden">
-        <div className="container mx-auto px-6 text-center max-w-4xl">
+      <section className="relative py-16 sm:py-24 md:py-28 bg-gradient-to-br from-[#08152d] via-[#0d1f44] to-[#1a3557] text-white overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6 text-center max-w-4xl">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-6xl font-bold leading-tight mb-6"
+            className="text-3xl sm:text-4xl md:text-6xl font-bold leading-tight mb-6"
           >
             Powerful Software Products
             <span className="block bg-gradient-to-r from-[#00E0FF] to-[#2E6BFF] bg-clip-text text-transparent">
@@ -101,20 +101,20 @@ export function ProductsPage() {
             </span>
           </motion.h1>
 
-          <p className="text-lg md:text-xl text-slate-300 leading-relaxed mb-10">
+          <p className="text-base sm:text-lg md:text-xl text-slate-300 leading-relaxed mb-10">
             Deploy scalable digital infrastructure and transform the way your
             organization operates, collaborates and innovates.
           </p>
 
-          <Button className="h-14 px-8 rounded-full text-lg bg-gradient-to-r from-[#00E0FF] to-[#2E6BFF] shadow-xl">
+          <Button className="h-12 sm:h-14 px-7 sm:px-8 rounded-full text-base sm:text-lg bg-gradient-to-r from-[#00E0FF] to-[#2E6BFF] shadow-xl">
             Explore Solutions
           </Button>
         </div>
       </section>
 
       {/* ===== PRODUCTS ===== */}
-      <section className="py-24">
-        <div className="container mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+      <section className="py-16 sm:py-24">
+        <div className="container mx-auto px-4 sm:px-6 grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10">
           {products.map((p, i) => {
             const Icon = p.icon;
             return (
@@ -124,7 +124,7 @@ export function ProductsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                className="bg-white rounded-3xl p-10 shadow-md hover:shadow-2xl transition duration-500 hover:-translate-y-2 flex flex-col"
+                className="bg-white rounded-3xl p-6 sm:p-10 shadow-md hover:shadow-2xl transition duration-500 hover:-translate-y-2 flex flex-col"
               >
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1E5EFF] to-[#2E6BFF] text-white flex items-center justify-center mb-6 shadow-lg">
                   <Icon size={30} />
@@ -170,17 +170,17 @@ export function ProductsPage() {
       </section>
 
       {/* ===== CTA ===== */}
-      <section className="py-24 bg-gradient-to-r from-[#1E5EFF] to-[#2E6BFF] text-white text-center">
-        <div className="container mx-auto px-6 max-w-3xl">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+      <section className="py-16 sm:py-24 bg-gradient-to-r from-[#1E5EFF] to-[#2E6BFF] text-white text-center">
+        <div className="container mx-auto px-4 sm:px-6 max-w-3xl">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
             Looking for a Custom Enterprise Solution?
           </h2>
-          <p className="text-lg text-blue-100 mb-10 leading-relaxed">
+          <p className="text-base sm:text-lg text-blue-100 mb-10 leading-relaxed">
             Our experts design scalable software architectures tailored exactly
             to your business workflows and growth vision.
           </p>
 
-          <Button className="h-14 px-10 rounded-full text-lg bg-white text-[#1E5EFF] hover:bg-slate-100 shadow-xl">
+          <Button className="h-12 sm:h-14 px-7 sm:px-10 rounded-full text-base sm:text-lg bg-white text-[#1E5EFF] hover:bg-slate-100 shadow-xl">
             Request Consultation
           </Button>
         </div>

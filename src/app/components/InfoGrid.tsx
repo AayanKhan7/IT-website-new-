@@ -127,11 +127,11 @@ export function InfoGrid() {
           </div>
         )
       case 'image':
-        return <img src={item.src} className="cell-bg-image" alt="grid content" />
+        return <img src={item.src} className="cell-bg-image" alt="grid content" loading="lazy" decoding="async" />
       case 'image-text':
         return (
           <>
-            <img src={item.src} className="cell-bg-image dim-image" alt="grid content" />
+            <img src={item.src} className="cell-bg-image dim-image" alt="grid content" loading="lazy" decoding="async" />
             <div className="inner-padding relative-z">
               <h2 className="title-large" style={{ whiteSpace: 'pre-line' }}>{item.title}</h2>
             </div>
@@ -140,7 +140,7 @@ export function InfoGrid() {
       case 'image-logo':
         return (
           <>
-            <img src={item.src} className="cell-bg-image dim-image" alt="grid content" />
+            <img src={item.src} className="cell-bg-image dim-image" alt="grid content" loading="lazy" decoding="async" />
             <div className="inner-padding relative-z align-center">
               <h2 className="logo-text">{item.logo}</h2>
             </div>
@@ -158,7 +158,7 @@ export function InfoGrid() {
       case 'overlay-small':
         return (
           <>
-            <img src={item.src} className="cell-bg-image dim-image" alt="grid content" />
+            <img src={item.src} className="cell-bg-image dim-image" alt="grid content" loading="lazy" decoding="async" />
             <div className={`inner-padding relative-z flex-center ${item.type === 'overlay' ? 'overlay-large' : 'overlay-small'}`}>
               <h2 style={{ whiteSpace: 'pre-line' }}>{item.title}</h2>
             </div>

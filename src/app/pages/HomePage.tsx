@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
@@ -9,8 +9,9 @@ import {
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
-import { InfoGrid } from '../components/InfoGrid';
-import Hyperspeed from '../components/figma/Hyperspeed';
+
+const Hyperspeed = lazy(() => import('../components/figma/Hyperspeed'));
+const InfoGrid = lazy(() => import('../components/InfoGrid').then((mod) => ({ default: mod.InfoGrid })));
 
 const heroHyperspeedOptions = {
   onSpeedUp: () => {},
@@ -52,6 +53,39 @@ const heroHyperspeedOptions = {
 
 export function HomePage() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [enableHyperspeed, setEnableHyperspeed] = useState(false);
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const smallScreen = window.matchMedia('(max-width: 1024px)').matches;
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
+
+    if (reduceMotion || smallScreen || saveData) {
+      setEnableHyperspeed(false);
+      return;
+    }
+
+    let timeoutId: number | undefined;
+    let idleId: number | undefined;
+    const onIdle = () => setEnableHyperspeed(true);
+
+    const hasRequestIdleCallback = typeof (window as Window & { requestIdleCallback?: unknown }).requestIdleCallback === 'function';
+
+    if (hasRequestIdleCallback) {
+      idleId = (window as Window & { requestIdleCallback: (cb: IdleRequestCallback, options?: IdleRequestOptions) => number }).requestIdleCallback(onIdle, { timeout: 1200 });
+    } else {
+      timeoutId = setTimeout(onIdle, 600) as unknown as number;
+    }
+
+    return () => {
+      if (typeof timeoutId === 'number') {
+        window.clearTimeout(timeoutId);
+      }
+      if (typeof idleId === 'number' && 'cancelIdleCallback' in window) {
+        (window as Window & { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(idleId);
+      }
+    };
+  }, []);
 
   const services = [
     { icon: <Code />, title: 'Web Designing', description: 'Creating stunning, responsive websites that captivate and convert visitors.' },
@@ -99,14 +133,20 @@ export function HomePage() {
   return (
     <div className="min-h-screen bg-[#fafafa] selection:bg-sky-500/30">
       {/* Hero Section */}
-      <section className="relative -mt-20 min-h-[92vh] md:min-h-screen flex items-center overflow-hidden bg-[#020617] text-white">
+      <section className="relative mt-0 md:-mt-20 min-h-[88vh] md:min-h-screen flex items-center overflow-hidden bg-[#020617] text-white">
         <div className="absolute inset-0 z-0 opacity-90">
-          <Hyperspeed effectOptions={heroHyperspeedOptions} />
+          {enableHyperspeed ? (
+            <Suspense fallback={<div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(30,94,255,0.2),transparent_70%)]" />}>
+              <Hyperspeed effectOptions={heroHyperspeedOptions} />
+            </Suspense>
+          ) : (
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(30,94,255,0.2),transparent_70%)]" />
+          )}
         </div>
         <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[#020617]/10 via-[#020617]/34 to-[#020617]/56"></div>
         <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_50%_0%,rgba(14,165,233,0.28),transparent_65%)]"></div>
         
-        <div className="relative z-10 container mx-auto px-6 pt-28 md:pt-32 pb-14 md:pb-20">
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-14 md:pb-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -116,18 +156,18 @@ export function HomePage() {
             <Badge variant="outline" className="mb-6 px-4 py-1 border-sky-500/50 text-sky-400 bg-sky-500/10 backdrop-blur-sm">
               <Sparkles size={14} className="mr-2" /> The New Era of Automation
             </Badge>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-7 leading-[1.08] text-white [text-shadow:0_2px_28px_rgba(2,6,23,0.55)]">
+            <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-7 leading-[1.08] text-white [text-shadow:0_2px_28px_rgba(2,6,23,0.55)]">
               Transform Business <br /> <span className="text-sky-300">Through Intellect</span>
             </h1>
-            <p className="text-lg md:text-xl text-slate-200 max-w-2xl mx-auto mb-10 leading-relaxed [text-shadow:0_1px_12px_rgba(2,6,23,0.45)]">
+            <p className="text-base sm:text-lg md:text-xl text-slate-200 max-w-2xl mx-auto mb-10 leading-relaxed [text-shadow:0_1px_12px_rgba(2,6,23,0.45)]">
               Scale your operations with bespoke AI agents and enterprise-grade automation tailored for the modern economy.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
-              <Button size="lg" className="h-14 px-10 rounded-full bg-sky-600 hover:bg-sky-500 text-white shadow-lg shadow-sky-600/20 transition-all">
+              <Button size="lg" className="h-12 sm:h-14 px-8 sm:px-10 rounded-full bg-sky-600 hover:bg-sky-500 text-white shadow-lg shadow-sky-600/20 transition-all">
                 Get Started Free
               </Button>
-              <Button size="lg" variant="ghost" className="h-14 px-10 rounded-full border border-slate-700 text-white hover:bg-white/5">
+              <Button size="lg" variant="ghost" className="h-12 sm:h-14 px-8 sm:px-10 rounded-full border border-slate-700 text-white hover:bg-white/5">
                 Watch Demo <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </div>
@@ -137,19 +177,21 @@ export function HomePage() {
 
       {/* Info Grid Section */}
       <div className="relative z-10 mt-0">
-        <InfoGrid />
+        <Suspense fallback={<div className="min-h-[320px] bg-[#08152d]" />}>
+          <InfoGrid />
+        </Suspense>
       </div>
 
       {/* Services Grid */}
-      <section className="relative py-32 overflow-hidden bg-[linear-gradient(180deg,#f8fbff_0%,#eef6ff_100%)]">
-        <div className="absolute -top-24 -left-16 h-64 w-64 rounded-full bg-cyan-200/45 blur-3xl" />
-        <div className="absolute -bottom-20 right-0 h-72 w-72 rounded-full bg-blue-200/40 blur-3xl" />
+      <section className="relative py-20 sm:py-24 md:py-32 overflow-hidden bg-[linear-gradient(180deg,#f8fbff_0%,#eef6ff_100%)]">
+        <div className="hidden md:block absolute -top-24 -left-16 h-64 w-64 rounded-full bg-cyan-200/45 blur-3xl" />
+        <div className="hidden md:block absolute -bottom-20 right-0 h-72 w-72 rounded-full bg-blue-200/40 blur-3xl" />
 
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <div className="grid lg:grid-cols-[1.4fr_1fr] gap-10 items-end mb-16 md:mb-20">
             <div className="max-w-3xl">
               <h2 className="text-cyan-700 font-semibold tracking-[0.24em] uppercase text-xs sm:text-sm mb-5">What We Build</h2>
-              <h3 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.05]">
+              <h3 className="text-3xl sm:text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.05]">
                 Crafted Capabilities,
                 <span className="block text-slate-600">Not Cookie-Cutter Services</span>
               </h3>
@@ -182,7 +224,7 @@ export function HomePage() {
                         <span className={`inline-flex rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] ${accent.chipClass}`}>
                           {accent.label}
                         </span>
-                        <p className="text-slate-300 font-black text-2xl mt-2">0{index + 1}</p>
+                        <p className="text-slate-500 font-black text-2xl mt-2">0{index + 1}</p>
                       </div>
                     </div>
 
@@ -194,7 +236,7 @@ export function HomePage() {
                       <ArrowRight className="w-4 h-4 text-slate-400 transition-transform duration-300 group-hover:translate-x-1" />
                     </div>
 
-                    <div className={`pointer-events-none absolute left-8 right-8 bottom-0 h-[3px] rounded-full bg-gradient-to-r opacity-80 ${accent.lineClass}`} />
+                    <div className={`pointer-events-none absolute left-4 right-4 md:left-8 md:right-8 bottom-0 h-[3px] rounded-full bg-gradient-to-r opacity-80 ${accent.lineClass}`} />
                   </article>
                 </motion.div>
               );
@@ -204,16 +246,16 @@ export function HomePage() {
       </section>
 
       {/* Industries We Serve */}
-      <section className="py-32 bg-slate-900 text-white overflow-hidden relative">
+      <section className="py-20 sm:py-24 md:py-32 bg-slate-900 text-white overflow-hidden relative">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-sky-500/5 blur-[120px] -z-0"></div>
-        <div className="container mx-auto px-6 relative z-10 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-16 tracking-tight">Targeted Industry Expertise</h2>
+        <div className="container mx-auto px-4 sm:px-6 relative z-10 text-center">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 md:mb-16 tracking-tight">Targeted Industry Expertise</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {industries.map((ind, i) => (
               <motion.div 
                 key={ind.name}
                 whileHover={{ y: -10 }}
-                className="bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-3xl flex flex-col items-center gap-4 hover:border-sky-500/50 transition-colors"
+                className="bg-white/5 backdrop-blur-md border border-white/10 p-5 sm:p-8 rounded-3xl flex flex-col items-center gap-4 hover:border-sky-500/50 transition-colors"
               >
                 <div className="text-sky-400">{ind.icon}</div>
                 <span className="font-medium text-sm tracking-wide">{ind.name}</span>
@@ -224,16 +266,16 @@ export function HomePage() {
       </section>
 
       {/* Lead Gen Banner */}
-      <section className="py-24 px-6">
+      <section className="py-20 sm:py-24 px-4 sm:px-6">
         <div className="container mx-auto">
-          <div className="bg-gradient-to-br from-sky-600 to-indigo-700 rounded-[3rem] p-12 md:p-20 text-white text-center relative overflow-hidden shadow-2xl">
+          <div className="bg-gradient-to-br from-sky-600 to-indigo-700 rounded-[2rem] sm:rounded-[3rem] p-8 sm:p-12 md:p-20 text-white text-center relative overflow-hidden shadow-2xl">
             <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
             <div className="relative z-10 max-w-3xl mx-auto">
-              <h2 className="text-4xl md:text-6xl font-bold mb-8">Ready to evolve?</h2>
-              <p className="text-xl text-sky-100/80 mb-10">Experience the future of business automation with a free 30-minute strategic audit.</p>
+              <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 sm:mb-8">Ready to evolve?</h2>
+              <p className="text-base sm:text-xl text-sky-100/80 mb-8 sm:mb-10">Experience the future of business automation with a free 30-minute strategic audit.</p>
               <div className="flex flex-wrap justify-center gap-4">
-                <Button size="lg" className="bg-[#ffffff] text-sky-700 hover:bg-slate-100 h-14 px-8 rounded-full text-lg font-bold">Start Your Project</Button>
-                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 h-14 px-8 rounded-full text-lg">Schedule a Call</Button>
+                <Button size="lg" className="bg-[#ffffff] text-sky-700 hover:bg-slate-100 h-12 sm:h-14 px-6 sm:px-8 rounded-full text-base sm:text-lg font-bold">Start Your Project</Button>
+                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 h-12 sm:h-14 px-6 sm:px-8 rounded-full text-base sm:text-lg">Schedule a Call</Button>
               </div>
             </div>
           </div>
@@ -241,13 +283,13 @@ export function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-32 bg-[#ffffff]">
-        <div className="container mx-auto px-6 text-center">
+      <section className="py-20 sm:py-24 md:py-32 bg-[#ffffff]">
+        <div className="container mx-auto px-4 sm:px-6 text-center">
           <h2 className="text-sm font-black uppercase tracking-[0.3em] text-sky-500 mb-6">Social Proof</h2>
-          <h3 className="text-4xl md:text-5xl font-bold text-slate-900 mb-20">Voices of Success</h3>
+          <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-12 md:mb-20">Voices of Success</h3>
           
           <div className="max-w-5xl mx-auto grid md:grid-cols-[1fr_auto_1fr] items-center gap-12">
-            <button onClick={() => setCurrentTestimonial(p => (p - 1 + testimonials.length) % testimonials.length)} className="hidden md:flex w-16 h-16 rounded-full border border-slate-200 items-center justify-center hover:bg-slate-50 transition-all">
+            <button onClick={() => setCurrentTestimonial(p => (p - 1 + testimonials.length) % testimonials.length)} className="hidden md:flex w-16 h-16 rounded-full border border-slate-200 items-center justify-center hover:bg-slate-50 transition-all" aria-label="Previous testimonial">
               <ChevronLeft size={24} />
             </button>
             
@@ -257,12 +299,12 @@ export function HomePage() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
-                className="bg-slate-50 p-10 md:p-16 rounded-[4rem] border border-slate-100"
+                className="bg-slate-50 p-6 sm:p-10 md:p-16 rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] border border-slate-100"
               >
                 <div className="flex justify-center gap-1 mb-8">
                   {[...Array(5)].map((_, i) => <Star key={i} size={20} className="fill-amber-400 text-amber-400" />)}
                 </div>
-                <p className="text-2xl md:text-3xl text-slate-800 font-medium leading-relaxed mb-10">"{testimonials[currentTestimonial].content}"</p>
+                <p className="text-xl sm:text-2xl md:text-3xl text-slate-800 font-medium leading-relaxed mb-8 sm:mb-10">"{testimonials[currentTestimonial].content}"</p>
                 <div>
                   <h4 className="text-xl font-bold text-slate-900">{testimonials[currentTestimonial].name}</h4>
                   <p className="text-sky-600">{testimonials[currentTestimonial].role}</p>
@@ -270,18 +312,27 @@ export function HomePage() {
               </motion.div>
             </AnimatePresence>
 
-            <button onClick={() => setCurrentTestimonial(p => (p + 1) % testimonials.length)} className="hidden md:flex w-16 h-16 rounded-full border border-slate-200 items-center justify-center hover:bg-slate-50 transition-all">
+            <button onClick={() => setCurrentTestimonial(p => (p + 1) % testimonials.length)} className="hidden md:flex w-16 h-16 rounded-full border border-slate-200 items-center justify-center hover:bg-slate-50 transition-all" aria-label="Next testimonial">
               <ChevronRight size={24} />
+            </button>
+          </div>
+
+          <div className="mt-8 flex md:hidden items-center justify-center gap-4">
+            <button onClick={() => setCurrentTestimonial(p => (p - 1 + testimonials.length) % testimonials.length)} className="flex w-11 h-11 rounded-full border border-slate-200 items-center justify-center hover:bg-slate-50 transition-all" aria-label="Previous testimonial">
+              <ChevronLeft size={18} />
+            </button>
+            <button onClick={() => setCurrentTestimonial(p => (p + 1) % testimonials.length)} className="flex w-11 h-11 rounded-full border border-slate-200 items-center justify-center hover:bg-slate-50 transition-all" aria-label="Next testimonial">
+              <ChevronRight size={18} />
             </button>
           </div>
         </div>
       </section>
 
       {/* Blog Preview */}
-      <section className="py-32 bg-slate-50">
-        <div className="container mx-auto px-6">
-          <div className="flex items-center justify-between mb-16">
-            <h2 className="text-4xl font-bold text-slate-900">Latest Insights</h2>
+      <section className="py-20 sm:py-24 md:py-32 bg-slate-50">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-10 md:mb-16 gap-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">Latest Insights</h2>
             <Link to="/blog" className="text-sky-600 font-bold flex items-center gap-2 group">
               View All <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
@@ -294,7 +345,7 @@ export function HomePage() {
                   <Badge className="bg-sky-50 text-sky-600 border-none mb-6 group-hover:bg-sky-600 group-hover:text-white transition-colors">{post.category}</Badge>
                   <h4 className="text-2xl font-bold text-slate-900 mb-4 leading-tight group-hover:text-sky-600 transition-colors">{post.title}</h4>
                   <p className="text-slate-500 mb-8">{post.excerpt}</p>
-                  <div className="flex items-center justify-between pt-6 border-t border-slate-100 text-sm font-medium text-slate-400">
+                  <div className="flex items-center justify-between pt-6 border-t border-slate-100 text-sm font-medium text-slate-600">
                     <span>{post.date}</span>
                     <span className="text-sky-600 group-hover:translate-x-1 transition-transform">Read More →</span>
                   </div>
@@ -306,14 +357,14 @@ export function HomePage() {
       </section>
 
       {/* CTA Strip */}
-      <section className="py-20 bg-slate-900 border-t border-white/5">
-        <div className="container mx-auto px-6">
+      <section className="py-16 sm:py-20 bg-slate-900 border-t border-white/5">
+        <div className="container mx-auto px-4 sm:px-6">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
             <div className="text-center lg:text-left">
               <h3 className="text-3xl font-bold text-white mb-3">Let's Build Something Amazing</h3>
               <p className="text-slate-400 text-lg">The bridge between your idea and reality starts with a hello.</p>
             </div>
-            <Button size="lg" className="h-16 px-12 rounded-full bg-sky-600 hover:bg-sky-500 shadow-2xl shadow-sky-500/20 text-lg">
+            <Button size="lg" className="h-12 sm:h-16 px-8 sm:px-12 rounded-full bg-sky-600 hover:bg-sky-500 shadow-2xl shadow-sky-500/20 text-base sm:text-lg">
               Get in Touch <ArrowRight className="ml-3" />
             </Button>
           </div>

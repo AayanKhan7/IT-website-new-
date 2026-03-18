@@ -32,9 +32,9 @@ export function PortfolioPage() {
   return (
     <div className="min-h-screen bg-[#020617] selection:bg-sky-500/30">
       {/* Dynamic Hero */}
-      <section className="relative pt-32 pb-24 overflow-hidden text-white border-b border-white/5">
+      <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-24 overflow-hidden text-white border-b border-white/5">
         <div className="absolute inset-0 z-0 opacity-30 bg-[radial-gradient(circle_at_50%_50%,#1e5eff_0%,transparent_70%)]" />
-        <div className="container relative z-10 mx-auto px-6">
+        <div className="container relative z-10 mx-auto px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -44,13 +44,13 @@ export function PortfolioPage() {
             <Badge variant="outline" className="mb-6 px-4 py-1 border-sky-500/30 text-sky-400 bg-sky-500/10 backdrop-blur-sm">
               <Sparkles size={14} className="mr-2" /> 2026 Case Studies
             </Badge>
-            <h1 className="text-6xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.1]">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.1]">
               Portfolio of <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-600">
                 Success Stories.
               </span>
             </h1>
-            <p className="text-xl text-slate-300 font-light leading-relaxed max-w-2xl">
+            <p className="text-base sm:text-lg md:text-xl text-slate-300 font-light leading-relaxed max-w-2xl">
               From disruptive startups to global enterprises, we engineer high-fidelity digital solutions that move the needle.
             </p>
           </motion.div>
@@ -58,14 +58,14 @@ export function PortfolioPage() {
       </section>
 
       {/* Modern Filter Bar */}
-      <section className="sticky top-0 z-50 py-6 bg-[#020617]/90 backdrop-blur-xl border-b border-white/5 shadow-2xl">
-        <div className="container mx-auto px-6">
+      <section className="sticky top-0 z-50 py-4 sm:py-6 bg-[#020617]/90 backdrop-blur-xl border-b border-white/5 shadow-2xl">
+        <div className="container mx-auto px-4 sm:px-6">
           <div className="flex flex-wrap items-center justify-center gap-3">
             {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setSelectedFilter(category.id)}
-                className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${
+                className={`px-4 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 ${
                   selectedFilter === category.id
                     ? 'bg-sky-500 text-white shadow-lg shadow-sky-500/20 scale-105'
                     : 'bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white'
@@ -79,9 +79,9 @@ export function PortfolioPage() {
       </section>
 
       {/* Project Showcase Grid */}
-      <section className="py-24 bg-[#020617]">
-        <div className="container mx-auto px-6">
-          <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+      <section className="py-16 sm:py-24 bg-[#020617]">
+        <div className="container mx-auto px-4 sm:px-6">
+          <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10">
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project) => (
                 <motion.div
@@ -93,7 +93,7 @@ export function PortfolioPage() {
                   transition={{ duration: 0.4 }}
                 >
                   <Card className="group h-full bg-slate-900/40 border-white/5 rounded-[2.5rem] overflow-hidden hover:bg-slate-900/60 transition-all duration-500 hover:border-sky-500/30 shadow-xl">
-                    <CardContent className="p-10 flex flex-col h-full">
+                    <CardContent className="p-6 sm:p-10 flex flex-col h-full">
                       <div className="flex items-center justify-between mb-8">
                         <div className="p-3 rounded-2xl bg-white/5 text-sky-400 group-hover:bg-sky-500 group-hover:text-white transition-all duration-300 shadow-inner">
                           <ExternalLink size={24} strokeWidth={1.5} />
@@ -144,9 +144,9 @@ export function PortfolioPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 px-6 bg-[#020617]">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-[#020617]">
         <div className="container mx-auto max-w-6xl">
-          <div className="bg-slate-900 border border-white/5 rounded-[4rem] p-12 md:p-24 text-center relative overflow-hidden shadow-2xl">
+          <div className="bg-slate-900 border border-white/5 rounded-[2rem] sm:rounded-[4rem] p-8 sm:p-12 md:p-24 text-center relative overflow-hidden shadow-2xl">
             <div className="absolute inset-0 opacity-[0.05] bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:40px_40px]" />
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -154,17 +154,17 @@ export function PortfolioPage() {
               viewport={{ once: true }}
               className="relative z-10"
             >
-              <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 tracking-tighter italic">
+              <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-8 tracking-tighter italic">
                 Be our next <br /> <span className="text-sky-400 not-italic">Success Story.</span>
               </h2>
-              <p className="text-xl text-slate-300 mb-10 font-light max-w-xl mx-auto">
+              <p className="text-base sm:text-xl text-slate-300 mb-10 font-light max-w-xl mx-auto">
                 Ready to transform your business requirements into a high-performance digital reality?
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <Button size="lg" className="h-16 px-10 rounded-full bg-sky-500 hover:bg-sky-400 text-white font-bold text-lg shadow-xl shadow-sky-500/20 transition-all hover:scale-105">
+                <Button size="lg" className="h-12 sm:h-16 px-7 sm:px-10 rounded-full bg-sky-500 hover:bg-sky-400 text-white font-bold text-base sm:text-lg shadow-xl shadow-sky-500/20 transition-all hover:scale-105">
                   Discuss Your Project
                 </Button>
-                <Button size="lg" variant="ghost" className="h-16 px-10 rounded-full border border-white/10 text-white hover:bg-white/5 text-lg transition-all">
+                <Button size="lg" variant="ghost" className="h-12 sm:h-16 px-7 sm:px-10 rounded-full border border-white/10 text-white hover:bg-white/5 text-base sm:text-lg transition-all">
                   View Our Process <ArrowRight className="ml-2" />
                 </Button>
               </div>

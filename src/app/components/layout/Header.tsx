@@ -40,8 +40,8 @@ export function Header() {
             : 'bg-[#0b162c]/88 backdrop-blur-xl border-b border-[#5b76a8]/30'
       }`}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+      <div className="container mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-18 sm:h-20">
           {/* Logo */}
           <Link to="/" className="group flex items-center space-x-3">
             <div className={`relative w-10 h-10 rounded-xl bg-gradient-to-br from-[#2f5fb8] to-[#3d73cf] flex items-center justify-center ring-1 ring-white/20 transition-all duration-300 ${
@@ -50,8 +50,8 @@ export function Header() {
               <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-[#7fb4ff] ring-2 ring-[#0b162c]"></span>
               <span className="text-white font-bold text-xl">A</span>
             </div>
-            <div className="flex flex-col">
-              <span className={`font-bold tracking-tight ${useHeroStyle ? 'text-white' : 'text-[#e8efff]'}`} style={{ fontFamily: 'Poppins' }}>
+            <div className="hidden min-[360px]:flex flex-col">
+              <span className={`font-bold tracking-tight text-sm sm:text-base ${useHeroStyle ? 'text-white' : 'text-[#e8efff]'}`} style={{ fontFamily: 'Poppins' }}>
                 Alpha Groups & Co.
               </span>
               <span className={`text-xs ${useHeroStyle ? 'text-white/70' : 'text-[#9ab0db]'}`}>From Ideas to Impact</span>
@@ -94,12 +94,15 @@ export function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className={`lg:hidden p-2.5 rounded-xl border transition-colors ${
+            className={`lg:hidden p-3 rounded-xl border transition-colors ${
               useHeroStyle
                 ? 'text-white border-white/25 hover:bg-white/10'
                 : 'text-[#d3e2ff] border-[#5b76a8]/35 hover:bg-[#112142]'
             }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-navigation"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -107,7 +110,7 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className={`lg:hidden mt-2 py-3 rounded-2xl border ${useHeroStyle ? 'border-white/15 bg-[#050914]/95' : 'border-[#5b76a8]/30 bg-[#0a1630]'} shadow-[0_16px_36px_rgba(2,8,20,0.45)]`}>
+          <div id="mobile-navigation" className={`lg:hidden mt-2 max-h-[75vh] overflow-y-auto py-3 rounded-2xl border ${useHeroStyle ? 'border-white/15 bg-[#050914]/95' : 'border-[#5b76a8]/30 bg-[#0a1630]'} shadow-[0_16px_36px_rgba(2,8,20,0.45)]`}>
             <nav className="flex flex-col space-y-2">
               {navItems.map((item) => (
                 <Link

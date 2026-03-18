@@ -66,9 +66,9 @@ export function ServicesPage() {
   return (
     <div className="min-h-screen bg-[#020617] selection:bg-sky-500/30" ref={containerRef}>
       {/* Dynamic Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-20 overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-sky-500/10 blur-[120px] rounded-full" />
-        <div className="container relative z-10 mx-auto px-6 text-center">
+        <div className="container relative z-10 mx-auto px-4 sm:px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -77,13 +77,13 @@ export function ServicesPage() {
             <Badge variant="outline" className="mb-6 border-sky-500/30 text-sky-400 bg-sky-500/5 px-4 py-1">
               <Sparkles size={14} className="mr-2" /> Our Capabilities
             </Badge>
-            <h1 className="text-6xl md:text-8xl font-bold tracking-tighter text-white mb-8 leading-[1.1]">
+            <h1 className="text-4xl sm:text-5xl md:text-8xl font-bold tracking-tighter text-white mb-8 leading-[1.1]">
               Solutions Built For <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-600">
                 The Next Decade.
               </span>
             </h1>
-            <p className="text-slate-400 text-xl max-w-2xl mx-auto font-light leading-relaxed">
+            <p className="text-slate-400 text-base sm:text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
               We eliminate the friction between your business goals and technological reality through high-fidelity engineering.
             </p>
           </motion.div>
@@ -91,15 +91,15 @@ export function ServicesPage() {
       </section>
 
       {/* Modern Services Bento-Style / Stacked List */}
-      <section className="py-24 px-6">
-        <div className="container mx-auto space-y-32">
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
+        <div className="container mx-auto space-y-16 sm:space-y-24 md:space-y-32">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              className={`flex flex-col lg:flex-row items-center gap-16 ${
+              className={`flex flex-col lg:flex-row items-center gap-8 sm:gap-12 md:gap-16 ${
                 index % 2 !== 0 ? 'lg:flex-row-reverse' : ''
               }`}
             >
@@ -110,9 +110,9 @@ export function ServicesPage() {
                 </div>
                 <div className="space-y-2">
                   <span className="text-sky-500 font-mono tracking-widest text-sm uppercase">{service.tagline}</span>
-                  <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">{service.title}</h2>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight">{service.title}</h2>
                 </div>
-                <p className="text-slate-400 text-lg leading-relaxed max-w-xl">
+                <p className="text-slate-400 text-base sm:text-lg leading-relaxed max-w-xl">
                   {service.description}
                 </p>
                 <div className="pt-4">
@@ -127,7 +127,7 @@ export function ServicesPage() {
                 <div className="relative group">
                   <div className={`absolute -inset-1 bg-gradient-to-r ${service.color} rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition duration-1000`} />
                   <Card className="relative bg-slate-900/50 border-slate-800 backdrop-blur-xl rounded-[2rem] overflow-hidden">
-                    <CardContent className="p-10">
+                    <CardContent className="p-6 sm:p-10">
                       <h3 className="text-white text-xl font-bold mb-8 flex items-center">
                         Technical Scope <div className="ml-4 h-px flex-1 bg-slate-800" />
                       </h3>
@@ -160,9 +160,9 @@ export function ServicesPage() {
       </section>
 
       {/* Ultra-Modern CTA Section */}
-      <section className="py-32 px-6">
+      <section className="py-20 sm:py-24 md:py-32 px-4 sm:px-6">
         <div className="container mx-auto">
-          <div className="relative rounded-[4rem] bg-gradient-to-br from-slate-900 to-black border border-slate-800 p-12 md:p-24 overflow-hidden text-center">
+          <div className="relative rounded-[2rem] sm:rounded-[4rem] bg-gradient-to-br from-slate-900 to-black border border-slate-800 p-8 sm:p-12 md:p-24 overflow-hidden text-center">
             {/* Ambient Background Glow */}
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(56,189,248,0.1),transparent_70%)]" />
             
@@ -172,18 +172,18 @@ export function ServicesPage() {
               viewport={{ once: true }}
               className="relative z-10 space-y-8"
             >
-              <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tighter">
+              <h2 className="text-3xl sm:text-4xl md:text-7xl font-bold text-white tracking-tighter">
                 Ready to initiate <br /> 
                 <span className="italic text-slate-500">the next phase?</span>
               </h2>
-              <p className="text-slate-400 text-xl max-w-xl mx-auto">
+              <p className="text-slate-400 text-base sm:text-xl max-w-xl mx-auto">
                 Consult with our engineering leads to map out your digital roadmap for 2026.
               </p>
               <div className="flex flex-wrap justify-center gap-6 pt-6">
-                <Button size="lg" className="h-16 px-10 rounded-full bg-sky-600 hover:bg-sky-500 text-lg font-bold shadow-xl shadow-sky-600/20">
+                <Button size="lg" className="h-12 sm:h-16 px-7 sm:px-10 rounded-full bg-sky-600 hover:bg-sky-500 text-base sm:text-lg font-bold shadow-xl shadow-sky-600/20">
                   Contact Us Today
                 </Button>
-                <Button size="lg" variant="outline" className="h-16 px-10 rounded-full border-slate-700 text-white hover:bg-white/5 text-lg">
+                <Button size="lg" variant="outline" className="h-12 sm:h-16 px-7 sm:px-10 rounded-full border-slate-700 text-white hover:bg-white/5 text-base sm:text-lg">
                   Explore Tech Stack
                 </Button>
               </div>

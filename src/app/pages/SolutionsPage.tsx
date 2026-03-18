@@ -58,9 +58,9 @@ export function SolutionsPage() {
   return (
     <div className="min-h-screen bg-[#fafafa] selection:bg-cyan-100">
       {/* Dynamic Hero */}
-      <section className="relative pt-32 pb-24 overflow-hidden bg-[#020617] text-white">
+      <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-24 overflow-hidden bg-[#020617] text-white">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(6,182,212,0.15),transparent_70%)]" />
-        <div className="container relative z-10 mx-auto px-6 text-center">
+        <div className="container relative z-10 mx-auto px-4 sm:px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -69,13 +69,13 @@ export function SolutionsPage() {
             <Badge variant="outline" className="mb-6 border-cyan-500/30 text-cyan-400 bg-cyan-500/5">
               Strategic Ecosystems
             </Badge>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-8">
               Engineered for <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
                 Business Outcomes.
               </span>
             </h1>
-            <p className="text-slate-400 text-xl max-w-2xl mx-auto font-light">
+            <p className="text-slate-400 text-base sm:text-lg md:text-xl max-w-2xl mx-auto font-light">
               Beyond simple services. We build the operational frameworks that power modern market leaders.
             </p>
           </motion.div>
@@ -83,7 +83,7 @@ export function SolutionsPage() {
       </section>
 
       {/* Solutions Interactive Grid */}
-      <section className="py-32 px-6">
+      <section className="py-20 sm:py-24 md:py-32 px-4 sm:px-6">
         <div className="container mx-auto">
           <div className="grid lg:grid-cols-2 gap-8">
             {solutions.map((item, idx) => (
@@ -95,7 +95,7 @@ export function SolutionsPage() {
                 transition={{ delay: idx * 0.1 }}
               >
                 <Card className="group relative overflow-hidden h-full bg-white border-slate-200 hover:border-cyan-500/50 transition-all duration-500 rounded-[2.5rem] shadow-sm hover:shadow-2xl">
-                  <CardContent className="p-10">
+                  <CardContent className="p-6 sm:p-10">
                     <div className="flex flex-col md:flex-row gap-8 items-start">
                       <div className={`w-20 h-20 rounded-[2rem] bg-gradient-to-br ${item.gradient} flex items-center justify-center text-white shadow-xl flex-shrink-0 group-hover:rotate-6 transition-transform`}>
                         {item.icon}
@@ -104,10 +104,10 @@ export function SolutionsPage() {
                         <span className="text-cyan-600 font-mono text-xs uppercase tracking-widest font-bold">
                           {item.tagline}
                         </span>
-                        <h3 className="text-3xl font-bold text-[#e8efff] leading-tight">
+                        <h3 className="text-2xl sm:text-3xl font-bold text-[#e8efff] leading-tight">
                           {item.title}
                         </h3>
-                        <p className="text-slate-500 text-lg leading-relaxed">
+                        <p className="text-slate-500 text-base sm:text-lg leading-relaxed">
                           {item.description}
                         </p>
                       </div>
@@ -135,7 +135,7 @@ export function SolutionsPage() {
                           <p className="text-xl font-bold text-slate-900">{item.duration}</p>
                         </div>
                       </div>
-                      <Button className="rounded-full bg-slate-900 hover:bg-cyan-600 h-14 px-8 group transition-all">
+                      <Button className="rounded-full bg-slate-900 hover:bg-cyan-600 h-12 sm:h-14 px-6 sm:px-8 group transition-all">
                         Select Solution <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
                       </Button>
                     </div>
@@ -148,10 +148,10 @@ export function SolutionsPage() {
       </section>
 
       {/* Horizontal Connected Process */}
-      <section className="py-32 bg-slate-900 text-white overflow-hidden">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-24">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Execution DNA</h2>
+      <section className="py-20 sm:py-24 md:py-32 bg-slate-900 text-white overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-14 sm:mb-24">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">Execution DNA</h2>
             <p className="text-slate-400 max-w-xl mx-auto">A standardized delivery pipeline ensuring zero deviation from your vision.</p>
           </div>
 
@@ -159,7 +159,7 @@ export function SolutionsPage() {
             {/* Connection Line */}
             <div className="hidden lg:block absolute top-1/2 left-0 w-full h-px bg-slate-800 -translate-y-1/2" />
             
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-12 relative z-10">
               {processSteps.map((item, idx) => (
                 <motion.div
                   key={item.step}
@@ -184,20 +184,20 @@ export function SolutionsPage() {
       </section>
 
       {/* Modern Contact CTA */}
-      <section className="py-32 px-6">
+      <section className="py-20 sm:py-24 md:py-32 px-4 sm:px-6">
         <div className="container mx-auto max-w-6xl">
-          <div className="bg-gradient-to-br from-cyan-600 to-blue-700 rounded-[4rem] p-12 md:p-24 text-white text-center relative overflow-hidden">
+          <div className="bg-gradient-to-br from-cyan-600 to-blue-700 rounded-[2rem] sm:rounded-[4rem] p-8 sm:p-12 md:p-24 text-white text-center relative overflow-hidden">
             <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
             <div className="relative z-10">
-              <h2 className="text-5xl font-bold mb-8">Ready to initiate?</h2>
-              <p className="text-xl text-cyan-100 max-w-xl mx-auto mb-10 font-light leading-relaxed">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8">Ready to initiate?</h2>
+              <p className="text-base sm:text-xl text-cyan-100 max-w-xl mx-auto mb-10 font-light leading-relaxed">
                 Connect with our technical architects to define the perfect package for your specific project scale.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Button size="lg" className="bg-white text-cyan-700 hover:bg-slate-100 h-16 px-10 rounded-full text-lg font-bold">
+                <Button size="lg" className="bg-white text-cyan-700 hover:bg-slate-100 h-12 sm:h-16 px-7 sm:px-10 rounded-full text-base sm:text-lg font-bold">
                   Book Strategy Session
                 </Button>
-                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 h-16 px-10 rounded-full text-lg">
+                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 h-12 sm:h-16 px-7 sm:px-10 rounded-full text-base sm:text-lg">
                   Explore Case Studies
                 </Button>
               </div>

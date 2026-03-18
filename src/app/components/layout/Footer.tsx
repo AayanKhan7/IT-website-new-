@@ -28,18 +28,18 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-[#020a18] px-4 pb-4 pt-12 sm:px-6 lg:px-8">
+    <footer className="bg-[#020a18] px-4 pb-4 pt-10 sm:pt-12 sm:px-6 lg:px-8">
       <div className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl border border-[#2f405f] bg-[#061225]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(61,115,207,0.18),transparent_40%),radial-gradient(circle_at_90%_90%,rgba(61,115,207,0.14),transparent_45%)]"></div>
         <div className="absolute inset-0 opacity-35 bg-[repeating-radial-gradient(circle_at_0%_100%,rgba(154,183,236,0.2)_0px,rgba(154,183,236,0.2)_1px,transparent_1px,transparent_12px)]"></div>
 
-        <div className="relative px-6 pb-6 pt-10 sm:px-10 sm:pt-12">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.4fr_0.85fr_0.85fr_1.15fr]">
+        <div className="relative px-5 pb-6 pt-8 sm:px-10 sm:pt-12">
+          <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-[1.4fr_0.85fr_0.85fr_1.15fr] lg:gap-10">
             <div>
               <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[#5e7db1]/40 bg-[#1f2a42] text-[#8ab7ff]">
                 <Sparkles size={21} />
               </div>
-              <h3 className="max-w-xs text-3xl font-semibold leading-tight text-white" style={{ fontFamily: 'Poppins' }}>
+              <h3 className="max-w-xs text-2xl sm:text-3xl font-semibold leading-tight text-white" style={{ fontFamily: 'Poppins' }}>
                 Join the next-generation digital growth platform
               </h3>
               <Button className="mt-6 rounded-full border border-[#6e89b7] bg-transparent px-6 text-white hover:bg-[#142643]">
@@ -98,6 +98,7 @@ export function Footer() {
                   className="h-9 border-0 bg-transparent text-white placeholder:text-[#88a2cd] focus-visible:ring-0"
                 />
                 <Button className="h-8 w-8 rounded-full bg-gradient-to-r from-[#4d7fd8] to-[#3d73cf] p-0 text-white hover:brightness-110">
+                  <span className="sr-only">Submit email subscription</span>
                   <ArrowRight size={14} />
                 </Button>
               </div>
