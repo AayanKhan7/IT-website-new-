@@ -46,6 +46,17 @@ export function HomePage() {
     { icon: <GitBranch />, title: 'API Integration', description: 'Seamless connectivity between third-party services and custom APIs.' },
   ];
 
+  const serviceAccents = [
+    { label: 'Build', iconClass: 'text-cyan-700', chipClass: 'bg-cyan-50 text-cyan-800 border-cyan-200', lineClass: 'from-cyan-400/0 via-cyan-500/70 to-cyan-600' },
+    { label: 'Scale', iconClass: 'text-emerald-700', chipClass: 'bg-emerald-50 text-emerald-800 border-emerald-200', lineClass: 'from-emerald-400/0 via-emerald-500/70 to-emerald-600' },
+    { label: 'Operate', iconClass: 'text-indigo-700', chipClass: 'bg-indigo-50 text-indigo-800 border-indigo-200', lineClass: 'from-indigo-400/0 via-indigo-500/70 to-indigo-600' },
+    { label: 'Commerce', iconClass: 'text-blue-700', chipClass: 'bg-blue-50 text-blue-800 border-blue-200', lineClass: 'from-blue-400/0 via-blue-500/70 to-blue-600' },
+    { label: 'Growth', iconClass: 'text-orange-700', chipClass: 'bg-orange-50 text-orange-800 border-orange-200', lineClass: 'from-orange-400/0 via-orange-500/70 to-orange-600' },
+    { label: 'Ship', iconClass: 'text-teal-700', chipClass: 'bg-teal-50 text-teal-800 border-teal-200', lineClass: 'from-teal-400/0 via-teal-500/70 to-teal-600' },
+    { label: 'Design', iconClass: 'text-pink-700', chipClass: 'bg-pink-50 text-pink-800 border-pink-200', lineClass: 'from-pink-400/0 via-pink-500/70 to-pink-600' },
+    { label: 'Connect', iconClass: 'text-violet-700', chipClass: 'bg-violet-50 text-violet-800 border-violet-200', lineClass: 'from-violet-400/0 via-violet-500/70 to-violet-600' },
+  ];
+
   const industries = [
     { icon: <Factory />, name: 'Manufacturing' },
     { icon: <Heart />, name: 'Healthcare' },
@@ -112,36 +123,64 @@ export function HomePage() {
       </div>
 
       {/* Services Grid */}
-      <section className="py-32 bg-[#ffffff]">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">
-            <div className="max-w-2xl">
-              <h2 className="text-sky-600 font-semibold tracking-widest uppercase text-sm mb-4">What we do</h2>
-              <h3 className="text-4xl md:text-6xl font-bold text-slate-900 tracking-tight">Comprehensive Digital Solutions</h3>
+      <section className="relative py-32 overflow-hidden bg-[linear-gradient(180deg,#f8fbff_0%,#eef6ff_100%)]">
+        <div className="absolute -top-24 -left-16 h-64 w-64 rounded-full bg-cyan-200/45 blur-3xl" />
+        <div className="absolute -bottom-20 right-0 h-72 w-72 rounded-full bg-blue-200/40 blur-3xl" />
+
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="grid lg:grid-cols-[1.4fr_1fr] gap-10 items-end mb-16 md:mb-20">
+            <div className="max-w-3xl">
+              <h2 className="text-cyan-700 font-semibold tracking-[0.24em] uppercase text-xs sm:text-sm mb-5">What We Build</h2>
+              <h3 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.05]">
+                Crafted Capabilities,
+                <span className="block text-slate-600">Not Cookie-Cutter Services</span>
+              </h3>
             </div>
-            <p className="text-slate-500 text-lg max-w-sm">
-              Tailored strategies designed to bridge the gap between complex tech and human intuition.
+            <p className="text-slate-600 text-lg max-w-md leading-relaxed lg:justify-self-end">
+              Every offer is delivered as a measurable business outcome, not a generic package. Pick what moves your roadmap now.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-              >
-                <div className="group p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:bg-[#ffffff] hover:shadow-2xl hover:shadow-sky-500/10 transition-all duration-500 h-full">
-                  <div className="w-14 h-14 rounded-2xl bg-[#ffffff] shadow-sm flex items-center justify-center text-sky-600 mb-6 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-300">
-                    {service.icon}
-                  </div>
-                  <h4 className="text-xl font-bold text-slate-900 mb-3">{service.title}</h4>
-                  <p className="text-slate-500 leading-relaxed">{service.description}</p>
-                </div>
-              </motion.div>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-6 xl:gap-7">
+            {services.map((service, index) => {
+              const accent = serviceAccents[index % serviceAccents.length];
+              const isWideCard = index === 1 || index === 5;
+
+              return (
+                <motion.div
+                  key={service.title}
+                  initial={{ opacity: 0, y: 28 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-70px' }}
+                  transition={{ duration: 0.55, delay: index * 0.06 }}
+                  className={`${isWideCard ? 'xl:col-span-6' : 'xl:col-span-3'}`}
+                >
+                  <article className="group relative h-full rounded-[2rem] border border-slate-200/80 bg-white/85 backdrop-blur-sm p-7 md:p-8 shadow-[0_10px_35px_-22px_rgba(15,23,42,0.55)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_26px_55px_-22px_rgba(3,105,161,0.42)]">
+                    <div className="flex items-start justify-between gap-5 mb-8">
+                      <div className={`w-14 h-14 rounded-2xl border border-black/5 bg-white flex items-center justify-center shadow-sm transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-105 ${accent.iconClass}`}>
+                        {service.icon}
+                      </div>
+                      <div className="text-right">
+                        <span className={`inline-flex rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] ${accent.chipClass}`}>
+                          {accent.label}
+                        </span>
+                        <p className="text-slate-300 font-black text-2xl mt-2">0{index + 1}</p>
+                      </div>
+                    </div>
+
+                    <h4 className="text-2xl font-black text-slate-900 mb-3 leading-tight">{service.title}</h4>
+                    <p className="text-slate-600 leading-relaxed text-[1.02rem] max-w-[42ch]">{service.description}</p>
+
+                    <div className="mt-8 pt-5 border-t border-slate-100 flex items-center justify-between">
+                      <span className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">Outcome-led Delivery</span>
+                      <ArrowRight className="w-4 h-4 text-slate-400 transition-transform duration-300 group-hover:translate-x-1" />
+                    </div>
+
+                    <div className={`pointer-events-none absolute left-8 right-8 bottom-0 h-[3px] rounded-full bg-gradient-to-r opacity-80 ${accent.lineClass}`} />
+                  </article>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
