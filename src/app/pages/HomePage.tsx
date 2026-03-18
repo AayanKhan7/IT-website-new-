@@ -4,28 +4,46 @@ import { motion, AnimatePresence } from 'motion/react';
 import { 
   ArrowRight, Code, Smartphone, Database, ShoppingCart, 
   TrendingUp, Layers, Palette, GitBranch, Factory, 
-  Heart, GraduationCap, Building, Stethoscope, ShoppingBag, 
-  Plane, ChevronLeft, ChevronRight, Star, Check, Sparkles
+  Heart, GraduationCap, Building, ShoppingBag, 
+  Plane, ChevronLeft, ChevronRight, Star, Sparkles
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
-import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { InfoGrid } from '../components/InfoGrid';
-import Hyperspeed, { hyperspeedPresets } from '../components/figma/Hyperspeed';
+import Hyperspeed from '../components/figma/Hyperspeed';
 
 const heroHyperspeedOptions = {
-  ...hyperspeedPresets.one,
-  speedUp: 1.35,
-  carLightsFade: 0.24,
-  totalSideLightSticks: 32,
-  lightPairsPerRoadWay: 52,
+  onSpeedUp: () => {},
+  onSlowDown: () => {},
+  distortion: 'LongRaceDistortion',
+  length: 400,
+  roadWidth: 10,
+  islandWidth: 5,
+  lanesPerRoad: 2,
+  fov: 90,
+  fovSpeedUp: 150,
+  speedUp: 2,
+  carLightsFade: 0.4,
+  totalSideLightSticks: 50,
+  lightPairsPerRoadWay: 70,
+  shoulderLinesWidthPercentage: 0.05,
+  brokenLinesWidthPercentage: 0.1,
+  brokenLinesLengthPercentage: 0.5,
+  lightStickWidth: [0.12, 0.5] as [number, number],
+  lightStickHeight: [1.3, 1.7] as [number, number],
+  movingAwaySpeed: [60, 80] as [number, number],
+  movingCloserSpeed: [-120, -160] as [number, number],
+  carLightsLength: [20, 60] as [number, number],
+  carLightsRadius: [0.05, 0.14] as [number, number],
+  carWidthPercentage: [0.3, 0.5] as [number, number],
+  carShiftX: [-0.2, 0.2] as [number, number],
+  carFloorSeparation: [0.05, 1] as [number, number],
   colors: {
-    ...hyperspeedPresets.one.colors,
-    roadColor: 0x050912,
-    islandColor: 0x060b16,
-    background: 0x01030a,
-    shoulderLines: 0x1c315f,
-    brokenLines: 0x1a2d56,
+    roadColor: 0x080808,
+    islandColor: 0x0a0a0a,
+    background: 0x000000,
+    shoulderLines: 0x131318,
+    brokenLines: 0x131318,
     leftCars: [0x60a5fa, 0x22d3ee, 0x38bdf8],
     rightCars: [0x93c5fd, 0x67e8f9, 0xbfdbfe],
     sticks: 0x7dd3fc
@@ -82,7 +100,7 @@ export function HomePage() {
     <div className="min-h-screen bg-[#fafafa] selection:bg-sky-500/30">
       {/* Hero Section */}
       <section className="relative -mt-20 min-h-[92vh] md:min-h-screen flex items-center overflow-hidden bg-[#020617] text-white">
-        <div className="absolute inset-0 z-0 opacity-85 md:opacity-90">
+        <div className="absolute inset-0 z-0 opacity-90">
           <Hyperspeed effectOptions={heroHyperspeedOptions} />
         </div>
         <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[#020617]/10 via-[#020617]/34 to-[#020617]/56"></div>

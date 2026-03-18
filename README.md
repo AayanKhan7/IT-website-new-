@@ -1,7 +1,7 @@
 
-  # Apply classy color theme
+  # Alpha Groups React Website
 
-  This is a code bundle for Apply classy color theme. The original project is available at https://www.figma.com/design/aCLx8g9M1mvrjlZwpmQWwi/Apply-classy-color-theme.
+  Modern React + Vite marketing website for Alpha Groups.
 
   ## Running the code
 
