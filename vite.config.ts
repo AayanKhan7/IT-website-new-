@@ -18,17 +18,54 @@ export default defineConfig({
   },
 
   build: {
+    // Enable minification with terser for better compression
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true, // Remove console logs in production
+      },
+    },
+    // Critical performance: chunk size warnings and splitting
+    chunkSizeWarningLimit: 1000,
+    reportCompressedSize: true,
+    
     rollupOptions: {
       output: {
-        manualChunks: {
-          react: ['react', 'react-dom', 'react-router'],
-          motion: ['motion'],
-          hyperspeed: ['three', 'postprocessing'],
+        manualChunks: (id) => {
+          // Vendor chunk splitting for better caching strategy
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
+              return 'react-vendor';
+            }
+            if (id.includes('motion')) {
+              return 'motion-vendor';
+            }
+            if (id.includes('three') || id.includes('postprocessing')) {
+              return 'graphics-vendor';
+            }
+            if (id.includes('@radix-ui') || id.includes('@emotion')) {
+              return 'ui-vendor';
+            }
+            return 'vendor';
+          }
         },
       },
     },
+    
+    // Core Web Vitals optimization
+    cssCodeSplit: true,
+    sourcemap: false, // Disable sourcemaps in production for smaller bundle
   },
 
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
   assetsInclude: ['**/*.svg', '**/*.csv'],
+
+  // Optimization: Configure server for development
+  server: {
+    middlewareMode: false,
+    headers: {
+      'Cache-Control': 'public, max-age=31536000, immutable',
+    },
+  },
 })
+

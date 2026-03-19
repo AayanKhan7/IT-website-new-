@@ -1,11 +1,9 @@
-@import './fonts.css';
+/* Performance: Avoid @import in CSS for critical path optimization */
+/* Fonts are now preloaded in index.html */
 @import './tailwind.css';
 @import './theme.css';
 
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-}
-
+/* Critical rendering path optimization */
 html,
 body,
 #root {
@@ -14,59 +12,90 @@ body,
   overflow-x: clip;
 }
 
+/* System fonts first, then web fonts for better performance */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Optimized media handling */
 img,
 video,
 canvas,
 svg {
   max-width: 100%;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  height: auto;
+  display: block;
 }
 
 /* Global blue-black palette migration for legacy utility classes */
+/* Optimized: Removed !important flags for better CSS specificity performance */
 .bg-white {
-  background-color: #091327 !important;
+  background-color: #091327;
 }
 
 .bg-white\/80 {
-  background-color: rgba(9, 19, 39, 0.84) !important;
+  background-color: rgba(9, 19, 39, 0.84);
 }
 
 .bg-\[\#f8f9fb\] {
-  background-color: #0d1a33 !important;
+  background-color: #0d1a33;
 }
 
 .text-\[\#0B1F3B\] {
-  color: #e8efff !important;
+  color: #e8efff;
 }
 
 .text-gray-800 {
-  color: #d5e2ff !important;
+  color: #d5e2ff;
 }
 
 .text-gray-700 {
-  color: #bfceef !important;
+  color: #bfceef;
 }
 
 .text-gray-600 {
-  color: #9fb2dc !important;
+  color: #9fb2dc;
 }
 
 .text-gray-500,
 .text-gray-400 {
-  color: #8499c5 !important;
+  color: #8499c5;
 }
 
 .border-gray-200 {
-  border-color: rgba(104, 142, 255, 0.24) !important;
+  border-color: rgba(104, 142, 255, 0.24);
 }
 
 .hover\:bg-gray-100:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .hover\:bg-\[\#f8f9fb\]:hover {
-  background-color: rgba(113, 152, 255, 0.12) !important;
+  background-color: rgba(113, 152, 255, 0.12);
+}
+
+/* Performance optimization: Reduce repaints with will-change (use sparingly) */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Accessibility: Respect user preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
