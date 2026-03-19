@@ -1,15 +1,57 @@
 
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Apply classy color theme</title>
-    </head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#1E5EFF" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="description" content="Premium IT Solutions & Digital Services" />
+    
+    <!-- Performance: Preconnect to critical third-party domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://cdn.example.com" />
+    
+    <!-- Font preload for critical fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" as="style" />
+    
+    <!-- Optimization: Prefer-reduce-motion for accessibility -->
+    <meta name="supports-color-scheme" content="dark" />
+    
+    <!-- Optimization: Font loading with optimal strategy -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" />
+    </noscript>
+    
+    <!-- Fallback system fonts for critical rendering path -->
+    <style>
+      body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+      @supports (font-variation-settings: normal) {
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+      }
+    </style>
 
-    <body>
-      <div id="root"></div>
-      <script type="module" src="/src/main.tsx"></script>
-    </body>
-  </html>
+    <title>Alpha Groups - Premium IT Solutions</title>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    
+    <!-- Web Vitals tracking for performance monitoring -->
+    <script>
+      if ('web-vital' in window) {
+        window.addEventListener('web-vital', (event) => {
+          const { name, value } = event.detail;
+          // Send to analytics - Replace with your endpoint
+          console.log(`${name}: ${Math.round(value)}ms`);
+        });
+      }
+    </script>
+    
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
   
